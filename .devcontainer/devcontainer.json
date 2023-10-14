@@ -1,0 +1,6 @@
+{
+    "name": "My Dev Environment",
+    "dockerFile": "Dockerfile",
+    "postCreateCommand": "service postgresql start",
+    "extensions": ["ms-vscode.vscode-docker"]
+} 
