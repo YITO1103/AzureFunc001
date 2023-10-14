@@ -26,10 +26,12 @@ namespace Company.Function
             name = name ?? data?.name;
 
             string responseMessage = string.IsNullOrEmpty(name)
-                ? "【CodespaceでつくってデプロイしてみたHttpTrigger_codespaces001FFBBBBB】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+                ? "【CodespaceでつくってデプロイしてみたHttpTrigger_codespaces001FFOOOOOOKKKKKKK】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
                 : $"Hello, {name}. This HTTP triggered function executed successfully.";
 
             return new OkObjectResult(responseMessage);
+
+            // https://jubilant-goggles-p79ppp6j653w5x-7071.app.github.dev/api/HttpTrigger_codespaces001
         }
     }
 }
