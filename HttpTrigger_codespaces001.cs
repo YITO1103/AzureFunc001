@@ -27,7 +27,7 @@ namespace Company.Function
 
             string responseMessage = string.IsNullOrEmpty(name)
 
-                ? "【CodespaceでつくってデプロイしてみたHttpTrigger_codespaces001FFBBBBB】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+                ? "【CodespaceでつくってデプロイしてみたHttpTrigger_codespaces002--------------】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
                 : $"Hello, {name}. This HTTP triggered function executed successfully.";
 
             return new OkObjectResult(responseMessage);
