@@ -1,6 +1,6 @@
 
 
-namespace Company.Function
+namespace Entity
 {
     public class Employee
     {
