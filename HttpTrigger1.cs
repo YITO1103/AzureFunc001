@@ -9,6 +9,10 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 // https://literate-giggle-wvxgggx6q6f9x7r-7071.app.github.dev/api/GetAllEmployees
+
+
+
+
 namespace Company.Function
 {
     public static class HttpTrigger1
