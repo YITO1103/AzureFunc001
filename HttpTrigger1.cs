@@ -9,11 +9,12 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 
+// GetAllEmployees: [GET,POST] http://localhost:7071/api/GetAllEmployees のホストをポートタブの7071に置き換えて実行
 // https://literate-giggle-wvxgggx6q6f9x7r-7071.app.github.dev/api/GetAllEmployees
 
 //https://functionapp120231012101939.azurewebsites.net/api/GetAllEmployees?code=OebUmPMeRN8aSHyXWXN_eJyHCdSe2IrL1mreUG_Z96IAAzFu6gfVRA==&clientId=blobs_extension
 
-
+//https://literate-giggle-wvxgggx6q6f9x7r-7071.app.github.dev/
 
 
 
@@ -44,10 +45,12 @@ Trace.WriteLine("---------------------------------------------------00000");
 object? res="初期値"; 
 
 try{
+/*
 var sDbConnectionString = Environment.GetEnvironmentVariable("DbConnectionString");
 if(string.IsNullOrEmpty(sDbConnectionString)){
     throw new Exception("DbConnectionString is null");
 }
+*/
 
             var employeeService = new EmployeeService();
             res = employeeService.GetEmployees();
