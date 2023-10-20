@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
 // https://literate-giggle-wvxgggx6q6f9x7r-7071.app.github.dev/api/GetAllEmployees
 
@@ -38,10 +38,11 @@ Trace.WriteLine("---------------------------------------------------00000");
 
             string responseMessage = string.IsNullOrEmpty(name)
 
-                ? "【CodespaceでつくってデプロイしてみたGetAllEmployees--------------Connect_db33333】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+                ? "【CodespaceでつくってデプロイしてみたGetAllEmployees--------------Connect_db55555】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
                 : $"Hello, {name}. This HTTP triggered function executed successfully.";
                 
 object? res=null; 
+/*
 try{
 var sDbConnectionString = Environment.GetEnvironmentVariable("DbConnectionString");
 if(string.IsNullOrEmpty(sDbConnectionString)){
@@ -54,6 +55,7 @@ if(string.IsNullOrEmpty(sDbConnectionString)){
 catch(Exception e){
             res = e;
 }
+*/
             //var employeeService = new EmployeeService();
             //var employees = employeeService.GetEmployees();
 

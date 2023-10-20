@@ -1,10 +1,4 @@
-/*
-using System;
-using System.Configuration;
-using System.Data.Entity;
-using System.IO;
-using Entity;
-*/
+#if xxxx
 
 using System;
 using System.IO;
@@ -23,11 +17,7 @@ using Entity;
 
 public class MyDbContext : DbContext
 {
-/*
-    public MyDbContext() : base(GetConnectionString())
-    {
-    }
-*/    
+  
     public MyDbContext() : base(GetConnectionOptions())
     {
 
@@ -96,3 +86,4 @@ return Environment.GetEnvironmentVariable("DbConnectionString");
 
     public DbSet<Employee> Employees { get; set; }
 }
+#endif
