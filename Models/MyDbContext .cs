@@ -1,14 +1,56 @@
+/*
 using System;
 using System.Configuration;
 using System.Data.Entity;
 using System.IO;
 using Entity;
+*/
+
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Npgsql.EntityFrameworkCore.PostgreSQL; // Npgsql.EntityFrameworkCore.PostgreSQLパッケージを追加
+
+
 using Microsoft.Extensions.Configuration;
+using Entity;
+
 public class MyDbContext : DbContext
 {
+/*
     public MyDbContext() : base(GetConnectionString())
     {
     }
+*/    
+    public MyDbContext() : base(GetConnectionOptions())
+    {
+
+    }
+
+    private static DbContextOptions<MyDbContext>  GetConnectionOptions()
+    {
+
+            //var connectionString = Environment.GetEnvironmentVariable("PostgreSQLConnectionString");
+            // --------------------------------------------------
+            // PostgreSQLに繋げてみる
+
+            //直打ち
+            var connectionString = "Server=sever-pg-a.postgres.database.azure.com;Database=postgres;Port=5432;User Id=postgres;Password=miumiu@0816;Ssl Mode=Require;";
+            var options = new DbContextOptionsBuilder<MyDbContext>()
+                .UseNpgsql(connectionString) // Npgsqlプロバイダを使用
+                .Options;
+
+            return options;
+
+    }
+
+
 
     private static string GetConnectionString()
     {
@@ -40,11 +82,6 @@ local.settings.json ファイル（ローカル開発用）およびAzure Functi
 return Environment.GetEnvironmentVariable("DbConnectionString");
 
 
-// --------------------------------------------------
-// PostgreSQLに繋げてみる
-
-//直打ち
-//return "Server=sever-pg-a.postgres.database.azure.com;Database=postgres;Port=5432;User Id=postgres;Password=miumiu@0816;Ssl Mode=Require;";
 
         /*
         IConfiguration configuration = new ConfigurationBuilder()
