@@ -7,8 +7,12 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 // https://literate-giggle-wvxgggx6q6f9x7r-7071.app.github.dev/api/GetAllEmployees
+
+//https://functionapp120231012101939.azurewebsites.net/api/GetAllEmployees?code=OebUmPMeRN8aSHyXWXN_eJyHCdSe2IrL1mreUG_Z96IAAzFu6gfVRA==&clientId=blobs_extension
+
 
 
 
@@ -19,10 +23,54 @@ namespace Company.Function
     {
         [FunctionName("GetAllEmployees")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
-         
+
+Trace.WriteLine("---------------------------------------------------00000");            
+            log.LogInformation("C# GetAllEmployees 888888888888.");
+
+            string name = req.Query["name"];
+
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            dynamic data = JsonConvert.DeserializeObject(requestBody);
+            name = name ?? data?.name;
+
+            string responseMessage = string.IsNullOrEmpty(name)
+
+                ? "【CodespaceでつくってデプロイしてみたGetAllEmployees--------------Connect_db2222】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+                : $"Hello, {name}. This HTTP triggered function executed successfully.";
+                
+object? res=null; 
+try{
+var sDbConnectionString = Environment.GetEnvironmentVariable("DbConnectionString");
+if(string.IsNullOrEmpty(sDbConnectionString)){
+    throw new Exception("DbConnectionString is null");
+}
+
+            var employeeService = new EmployeeService();
+            res = employeeService.GetEmployees();
+}
+catch(Exception e){
+            res = e;
+}
+            //var employeeService = new EmployeeService();
+            //var employees = employeeService.GetEmployees();
+
+Trace.WriteLine("---------------------------------------------------00001");
+            //return new OkObjectResult(responseMessage);
+
+            return new OkObjectResult(
+                new {
+                    status=0,
+                    msg=responseMessage,
+                    data=res
+                }
+            );
+
+#if XXXXXX
+
+         try{
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             string name = req.Query["name"];
@@ -46,12 +94,20 @@ namespace Company.Function
                     msg="OKです。",
                     data=employees
                 }
+            );
+         }
+         catch(Exception e){
+           return new OkObjectResult(
+                new {
+                    status=-1,
+                    msg="NGです。",
+                    Exception=e
+                }
 
-                
-                );
-
+           );
+         }
+#endif
            
-
         }
     }
 }
