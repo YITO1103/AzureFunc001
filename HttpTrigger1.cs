@@ -38,11 +38,11 @@ Trace.WriteLine("---------------------------------------------------00000");
 
             string responseMessage = string.IsNullOrEmpty(name)
 
-                ? $"{DateTime.Now.ToString("yyyyMMdd HHmmss.sss")}--【CodespaceでつくってデプロイしてみたGetAllEmployees--------------Connect_db7777】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+                ? $"{DateTime.Now.ToLocalTime().ToString("yyyyMMdd HHmmss.sss")}--【Connect_db９９】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
                 : $"Hello, {name}. This HTTP triggered function executed successfully.";
                 
-object? res=null; 
-/*
+object? res="初期値"; 
+
 try{
 var sDbConnectionString = Environment.GetEnvironmentVariable("DbConnectionString");
 if(string.IsNullOrEmpty(sDbConnectionString)){
@@ -55,7 +55,7 @@ if(string.IsNullOrEmpty(sDbConnectionString)){
 catch(Exception e){
             res = e;
 }
-*/
+
             //var employeeService = new EmployeeService();
             //var employees = employeeService.GetEmployees();
 
