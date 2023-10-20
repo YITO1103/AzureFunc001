@@ -1,0 +1,5 @@
+SELECT TOP (1000) [id]
+      ,[firstname]
+      ,[lastname]
+      ,[age]
+  FROM [dbo].[employees]
