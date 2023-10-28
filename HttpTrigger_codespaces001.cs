@@ -30,9 +30,10 @@ Trace.WriteLine("---------------------------------------------------00000");
             dynamic data = JsonConvert.DeserializeObject(requestBody);
             name = name ?? data?.name;
 
+
             string responseMessage = string.IsNullOrEmpty(name)
 
-                ? "【CodespaceでつくってデプロイしてみたHttpTrigger_codespaces--------------Connect_db444444】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+                ? $"{DateTime.Now.ToString("yyyyMMdd HHmmss.sss")}--【CodespaceでつくってデプロイしてみたHttpTrigger_codespaces--------------Connect_db6666】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
                 : $"Hello, {name}. This HTTP triggered function executed successfully.";
                 
 Trace.WriteLine("---------------------------------------------------00001");

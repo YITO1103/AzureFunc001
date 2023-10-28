@@ -1,19 +1,20 @@
-using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System.Diagnostics;
+using Microsoft.Azure.WebJobs;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System;
 
+// GetAllEmployees: [GET,POST] http://localhost:7071/api/GetAllEmployees のホストをポートタブの7071に置き換えて実行
 // https://literate-giggle-wvxgggx6q6f9x7r-7071.app.github.dev/api/GetAllEmployees
 
 //https://functionapp120231012101939.azurewebsites.net/api/GetAllEmployees?code=OebUmPMeRN8aSHyXWXN_eJyHCdSe2IrL1mreUG_Z96IAAzFu6gfVRA==&clientId=blobs_extension
 
-
+//https://literate-giggle-wvxgggx6q6f9x7r-7071.app.github.dev/
 
 
 
@@ -38,15 +39,18 @@ Trace.WriteLine("---------------------------------------------------00000");
 
             string responseMessage = string.IsNullOrEmpty(name)
 
-                ? "【CodespaceでつくってデプロイしてみたGetAllEmployees--------------Connect_db2222】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
+                ? $"{DateTime.Now.ToLocalTime().ToString("yyyyMMdd HHmmss.sss")}--【Connect_db９９】This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
                 : $"Hello, {name}. This HTTP triggered function executed successfully.";
                 
-object? res=null; 
+object? res="初期値"; 
+
 try{
+/*
 var sDbConnectionString = Environment.GetEnvironmentVariable("DbConnectionString");
 if(string.IsNullOrEmpty(sDbConnectionString)){
     throw new Exception("DbConnectionString is null");
 }
+*/
 
             var employeeService = new EmployeeService();
             res = employeeService.GetEmployees();
@@ -54,6 +58,7 @@ if(string.IsNullOrEmpty(sDbConnectionString)){
 catch(Exception e){
             res = e;
 }
+
             //var employeeService = new EmployeeService();
             //var employees = employeeService.GetEmployees();
 
